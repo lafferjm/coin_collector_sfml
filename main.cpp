@@ -13,6 +13,7 @@ int main(int argc, char **argv) {
   sf::Texture coinTexture("assets/sprites/coin.png", false,
                           sf::IntRect({0, 0}, {32, 32}));
   sf::Sprite sprite(coinTexture);
+  sprite.scale({2.f, 2.f});
 
   while (window.isOpen()) {
     while (const std::optional event = window.pollEvent()) {
