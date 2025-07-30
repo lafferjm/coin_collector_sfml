@@ -5,10 +5,10 @@
 
 Coin::Coin(float scale, const std::string &texture_path, int frame_count)
     : m_texture(), m_sprite(m_texture), m_frame_count(frame_count),
-      m_current_frame(0), m_frame_duration(1.5f), m_elapsed_time(0) {
-  m_texture = sf::Texture(texture_path, false,
-                          sf::IntRect({m_current_frame, 0}, {32, 32}));
+      m_current_frame(0), m_frame_duration(0.08f), m_elapsed_time(0) {
+  m_texture = sf::Texture(texture_path, false);
   m_sprite = sf::Sprite(m_texture);
+  m_sprite.setTextureRect(sf::IntRect({m_current_frame, 0}, {32, 32}));
   m_sprite.setScale({scale, scale});
 }
 
@@ -21,6 +21,4 @@ void Coin::update(float delta_time) {
     m_elapsed_time = 0.0f;
     m_sprite.setTextureRect(sf::IntRect({m_current_frame * 32, 0}, {32, 32}));
   }
-
-  std::cout << "Current Frame: " << m_current_frame << std::endl;
 }
