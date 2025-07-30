@@ -12,7 +12,9 @@ int main(int argc, char **argv) {
   sf::RenderWindow window(sf::VideoMode({WIDTH, HEIGHT}), "Coin Collector");
   window.setFramerateLimit(60);
 
-  Coin *coin = new Coin(2.f, "assets/sprites/coin.png");
+  sf::Clock clock;
+
+  Coin *coin = new Coin(2.f, "assets/sprites/coin.png", 9);
 
   while (window.isOpen()) {
     while (const std::optional event = window.pollEvent()) {
@@ -21,8 +23,11 @@ int main(int argc, char **argv) {
       }
     }
 
+    float delta_time = clock.restart().asSeconds();
+
     window.clear(sf::Color::Green);
 
+    coin->update(delta_time);
     coin->draw(window);
 
     window.display();
