@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(SFML 3.0 COMPONENTS Window Graphics REQUIRED)
 
-add_executable(coin_collector main.cpp)
+add_executable(coin_collector main.cpp game_objects/coin/coin.cpp)
 target_link_libraries(coin_collector PRIVATE SFML::Graphics SFML::Window)
 
 # === Copy assets folder next to the executable ===

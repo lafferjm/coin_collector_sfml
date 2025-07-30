@@ -3,6 +3,8 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 
+#include "game_objects/coin/coin.hpp"
+
 const int WIDTH = 1024;
 const int HEIGHT = 768;
 
