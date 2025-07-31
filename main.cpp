@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "game_objects/coin/coin.hpp"
+#include "utilities/sprite_group/sprite_group.hpp"
 
 const int WIDTH = 1024;
 const int HEIGHT = 768;
@@ -14,12 +15,12 @@ int main(int argc, char **argv) {
 
   sf::Clock clock;
 
-  std::vector<Coin *> coin_group;
+  SpriteGroup<Coin *> coin_group;
 
   for (int i = 0; i < 10; i++) {
     Coin *coin = new Coin(2.f, "assets/sprites/coin.png", 9);
     coin->set_position(i * 32, 0);
-    coin_group.push_back(coin);
+    coin_group.add(coin);
   }
 
   while (window.isOpen()) {
@@ -33,10 +34,8 @@ int main(int argc, char **argv) {
 
     window.clear(sf::Color::Green);
 
-    for (auto coin : coin_group) {
-      coin->update(delta_time);
-      coin->draw(window);
-    }
+    coin_group.update(delta_time);
+    coin_group.draw(window);
 
     window.display();
   }
