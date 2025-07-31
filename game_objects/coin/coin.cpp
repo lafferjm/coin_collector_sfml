@@ -1,6 +1,4 @@
 #include "coin.hpp"
-#include <SFML/Graphics.hpp>
-#include <iostream>
 #include <string>
 
 Coin::Coin(float scale, const std::string &texture_path, int frame_count)
