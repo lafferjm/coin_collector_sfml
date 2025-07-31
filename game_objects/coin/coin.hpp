@@ -10,6 +10,7 @@ public:
   Coin(float, const std::string &, int);
   void draw(sf::RenderWindow &);
   void update(float);
+  void set_position(float, float);
 
 private:
   sf::Sprite m_sprite;

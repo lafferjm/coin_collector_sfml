@@ -1,7 +1,7 @@
-#include <iostream>
-
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
+#include <iostream>
+#include <vector>
 
 #include "game_objects/coin/coin.hpp"
 
@@ -14,7 +14,13 @@ int main(int argc, char **argv) {
 
   sf::Clock clock;
 
-  Coin *coin = new Coin(2.f, "assets/sprites/coin.png", 9);
+  std::vector<Coin *> coin_group;
+
+  for (int i = 0; i < 10; i++) {
+    Coin *coin = new Coin(2.f, "assets/sprites/coin.png", 9);
+    coin->set_position(i * 32, 0);
+    coin_group.push_back(coin);
+  }
 
   while (window.isOpen()) {
     while (const std::optional event = window.pollEvent()) {
@@ -27,8 +33,10 @@ int main(int argc, char **argv) {
 
     window.clear(sf::Color::Green);
 
-    coin->update(delta_time);
-    coin->draw(window);
+    for (auto coin : coin_group) {
+      coin->update(delta_time);
+      coin->draw(window);
+    }
 
     window.display();
   }

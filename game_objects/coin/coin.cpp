@@ -22,3 +22,7 @@ void Coin::update(float delta_time) {
     m_sprite.setTextureRect(sf::IntRect({m_current_frame * 32, 0}, {32, 32}));
   }
 }
+
+void Coin::set_position(float x, float y) {
+  m_sprite.setPosition(sf::Vector2f({x, y}));
+}
