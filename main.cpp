@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <iostream>
+#include <memory>
 #include <vector>
 
 #include "game_objects/coin/coin.hpp"
@@ -15,10 +16,10 @@ int main(int argc, char **argv) {
 
   sf::Clock clock;
 
-  SpriteGroup<Coin *> coin_group;
+  SpriteGroup<Coin> coin_group;
 
   for (int i = 0; i < 10; i++) {
-    Coin *coin = new Coin(2.f, "assets/sprites/coin.png", 9);
+    auto coin = std::make_shared<Coin>(2.f, "assets/sprites/coin.png", 9);
     coin->set_position(i * 32, 0);
     coin_group.add(coin);
   }

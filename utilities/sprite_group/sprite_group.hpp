@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <memory>
 #include <vector>
 
 #ifndef __SPRITE_GROUP_HPP__
@@ -6,15 +7,15 @@
 
 template <typename T> class SpriteGroup {
 public:
-  void add(T);
+  void add(std::shared_ptr<T>);
   void draw(sf::RenderWindow &);
   void update(float);
 
 private:
-  std::vector<T> m_objects;
+  std::vector<std::shared_ptr<T>> m_objects;
 };
 
-template <typename T> void SpriteGroup<T>::add(T obj) {
+template <typename T> void SpriteGroup<T>::add(std::shared_ptr<T> obj) {
   m_objects.push_back(obj);
 }
 
