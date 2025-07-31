@@ -1,13 +1,12 @@
-#include <SFML/Graphics.hpp>
+#pragma once
+
 #include <memory>
 #include <vector>
 
-#ifndef __SPRITE_GROUP_HPP__
-#define __SPRITE_GROUP_HPP__
 
 template <typename T> class SpriteGroup {
 public:
-  void add(std::shared_ptr<T>);
+  void add(const std::shared_ptr<T>&);
   void draw(sf::RenderWindow &);
   void update(float);
 
@@ -15,7 +14,7 @@ private:
   std::vector<std::shared_ptr<T>> m_objects;
 };
 
-template <typename T> void SpriteGroup<T>::add(std::shared_ptr<T> obj) {
+template <typename T> void SpriteGroup<T>::add(const std::shared_ptr<T> &obj) {
   m_objects.push_back(obj);
 }
 
@@ -30,5 +29,3 @@ template <typename T> void SpriteGroup<T>::update(float dt) {
     obj->update(dt);
   }
 }
-
-#endif

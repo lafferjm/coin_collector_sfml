@@ -1,14 +1,12 @@
+#pragma once
+
 #include <string>
-
 #include <SFML/Graphics.hpp>
-
-#ifndef __COIN_HPP__
-#define __COIN_HPP__
 
 class Coin {
 public:
   Coin(float, const std::string &, int);
-  void draw(sf::RenderWindow &);
+  void draw(sf::RenderWindow &) const;
   void update(float);
   void set_position(float, float);
 
@@ -20,5 +18,3 @@ private:
   float m_frame_duration;
   float m_elapsed_time;
 };
-
-#endif

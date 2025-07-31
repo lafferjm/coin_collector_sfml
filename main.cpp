@@ -1,26 +1,28 @@
-#include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
-#include <iostream>
+#include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/System/Clock.hpp>
+#include <SFML/Window/Event.hpp>
+#include <SFML/Window/VideoMode.hpp>
 #include <memory>
-#include <vector>
+#include <optional>
 
 #include "game_objects/coin/coin.hpp"
 #include "utilities/sprite_group/sprite_group.hpp"
 
-const int WIDTH = 1024;
-const int HEIGHT = 768;
+constexpr int width = 1024;
+constexpr int height = 768;
+constexpr int frame_rate = 60;
 
-int main(int argc, char **argv) {
-  sf::RenderWindow window(sf::VideoMode({WIDTH, HEIGHT}), "Coin Collector");
-  window.setFramerateLimit(60);
+int main(int, char **) {
+  sf::RenderWindow window(sf::VideoMode({width, height}), "Coin Collector");
+  window.setFramerateLimit(frame_rate);
 
   sf::Clock clock;
 
   SpriteGroup<Coin> coin_group;
 
   for (int i = 0; i < 10; i++) {
-    auto coin = std::make_shared<Coin>(2.f, "assets/sprites/coin.png", 9);
-    coin->set_position(i * 32, 0);
+    const auto coin = std::make_shared<Coin>(2.f, "assets/sprites/coin.png", 9);
+    coin->set_position(static_cast<float>(i) * 32, 0);
     coin_group.add(coin);
   }
 
@@ -31,7 +33,7 @@ int main(int argc, char **argv) {
       }
     }
 
-    float delta_time = clock.restart().asSeconds();
+    const float delta_time = clock.restart().asSeconds();
 
     window.clear(sf::Color::Green);
 
