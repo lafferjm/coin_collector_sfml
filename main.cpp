@@ -4,6 +4,7 @@
 #include <SFML/Window/VideoMode.hpp>
 #include <memory>
 #include <optional>
+#include <random>
 
 #include "game_objects/coin/coin.hpp"
 #include "utilities/sprite_group/sprite_group.hpp"
@@ -16,13 +17,20 @@ int main(int, char **) {
   sf::RenderWindow window(sf::VideoMode({width, height}), "Coin Collector");
   window.setFramerateLimit(frame_rate);
 
+  std::random_device rd;
+  std::mt19937 gen(rd());
+  std::uniform_real_distribution<float> x_dist(0.0f, 1024.f - 32.f);
+  std::uniform_real_distribution<float> y_dist(0.0f, 768.f - 32.f);
+
   sf::Clock clock;
 
   SpriteGroup<Coin> coin_group;
 
   for (int i = 0; i < 10; i++) {
     const auto coin = std::make_shared<Coin>(2.f, "assets/sprites/coin.png", 9);
-    coin->set_position(static_cast<float>(i) * 32, 0);
+    float x_position = x_dist(gen);
+    float y_position = y_dist(gen);
+    coin->set_position(x_position, y_position);
     coin_group.add(coin);
   }
 
