@@ -7,6 +7,7 @@
 #include <random>
 
 #include "game_objects/coin/coin.hpp"
+#include "game_objects/player/player.hpp"
 #include "utilities/sprite_group/sprite_group.hpp"
 
 constexpr int width = 1024;
@@ -26,6 +27,8 @@ int main(int, char **) {
 
   SpriteGroup<Coin> coin_group;
 
+  auto player = std::make_unique<Player>(5.f, "assets/sprites/player.png", 10);
+
   for (int i = 0; i < 10; i++) {
     const auto coin = std::make_shared<Coin>(2.f, "assets/sprites/coin.png", 9);
     float x_position = x_dist(gen);
@@ -44,6 +47,8 @@ int main(int, char **) {
     const float delta_time = clock.restart().asSeconds();
 
     window.clear(sf::Color::Green);
+
+    player->draw(window);
 
     coin_group.update(delta_time);
     coin_group.draw(window);
