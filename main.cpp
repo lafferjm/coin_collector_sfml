@@ -27,7 +27,7 @@ int main(int, char **) {
 
   SpriteGroup<Coin> coin_group;
 
-  auto player = std::make_unique<Player>(5.f, "assets/sprites/player.png", 10);
+  auto player = std::make_unique<Player>(5.f, "assets/sprites/player.png");
 
   for (int i = 0; i < 10; i++) {
     const auto coin = std::make_shared<Coin>(2.f, "assets/sprites/coin.png", 9);
