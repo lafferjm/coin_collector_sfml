@@ -15,4 +15,5 @@ private:
     sf::Sprite m_sprite;
     sf::Texture m_texture;
     std::unordered_map<std::string, std::vector<sf::IntRect>> m_animations;
+    std::string m_current_animation;
 };
