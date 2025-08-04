@@ -48,9 +48,10 @@ int main(int, char **) {
 
     window.clear(sf::Color::Green);
 
-    player->draw(window);
-
+    player->update(delta_time);
     coin_group.update(delta_time);
+
+    player->draw(window);
     coin_group.draw(window);
 
     window.display();

@@ -17,4 +17,6 @@ private:
   int m_frame_count;
   float m_frame_duration;
   float m_elapsed_time;
+
+  static constexpr float m_animation_fps = 13.f;
 };
