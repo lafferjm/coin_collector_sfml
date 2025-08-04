@@ -9,7 +9,7 @@ class Player {
 public:
     Player(float, const std::string &);
     void draw(sf::RenderWindow &) const;
-    void update(const float);
+    void update(float);
 private:
     void load_animations();
 

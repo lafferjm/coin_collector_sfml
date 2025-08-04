@@ -20,19 +20,19 @@ int main(int, char **) {
 
   std::random_device rd;
   std::mt19937 gen(rd());
-  std::uniform_real_distribution<float> x_dist(0.0f, 1024.f - 32.f);
-  std::uniform_real_distribution<float> y_dist(0.0f, 768.f - 32.f);
+  std::uniform_real_distribution x_dist(0.0f, 1024.f - 32.f);
+  std::uniform_real_distribution y_dist(0.0f, 768.f - 32.f);
 
   sf::Clock clock;
 
   SpriteGroup<Coin> coin_group;
 
-  auto player = std::make_unique<Player>(5.f, "assets/sprites/player.png");
+  const auto player = std::make_unique<Player>(5.f, "assets/sprites/player.png");
 
   for (int i = 0; i < 10; i++) {
     const auto coin = std::make_shared<Coin>(2.f, "assets/sprites/coin.png", 9);
-    float x_position = x_dist(gen);
-    float y_position = y_dist(gen);
+    const float x_position = x_dist(gen);
+    const float y_position = y_dist(gen);
     coin->set_position(x_position, y_position);
     coin_group.add(coin);
   }
