@@ -3,16 +3,16 @@
 #include <SFML/Graphics.hpp>
 
 void Player::load_animations() {
-    m_animations["idle"] = {};
-    m_animations["walk"] = {};
+    m_animations[Animation::IDLE] = {};
+    m_animations[Animation::WALK] = {};
 
     for (int i = 0; i < 10; i++) {
-        m_animations["idle"].push_back(sf::IntRect({i * 32, 0}, {32, 32}));
-        m_animations["walk"].push_back(sf::IntRect({i * 32, 64}, {32, 32}));
+        m_animations[Animation::IDLE].push_back(sf::IntRect({i * 32, 0}, {32, 32}));
+        m_animations[Animation::WALK].push_back(sf::IntRect({i * 32, 64}, {32, 32}));
     }
 }
 
-Player::Player(float scale, const std::string &texture_path) : m_sprite(m_texture), m_current_animation("idle"),
+Player::Player(float scale, const std::string &texture_path) : m_sprite(m_texture), m_current_animation(Animation::IDLE),
                                                                m_current_frame(0), m_frame_duration(1/m_animation_fps),
                                                                m_elapsed_time(0) {
     m_texture = sf::Texture(texture_path, false);
