@@ -17,17 +17,6 @@ constexpr int frame_rate = 60;
 
 constexpr float player_speed = 200;
 
-sf::Vector2f normalize(sf::Vector2f move_direction) {
-  float length = std::sqrt(move_direction.x * move_direction.x + move_direction.y * move_direction.y);
-
-  if (length != 0.f) {
-    move_direction.x /= length;
-    move_direction.y /= length;
-  }
-
-  return move_direction;
-}
-
 int main(int, char **) {
   sf::RenderWindow window(sf::VideoMode({width, height}), "Coin Collector");
   window.setFramerateLimit(frame_rate);
@@ -76,13 +65,13 @@ int main(int, char **) {
       move_direction.y += 1;
     }
 
-    move_direction = normalize(move_direction);
-
-    sf::Vector2f player_direction = move_direction * delta_time * player_speed;
+    if (move_direction != sf::Vector2f(0.f, 0.f)) {
+      move_direction = move_direction.normalized() * delta_time * player_speed;
+    }
 
     window.clear(sf::Color::Green);
 
-    player->update(delta_time, player_direction);
+    player->update(delta_time, move_direction);
     coin_group.update(delta_time);
 
     player->draw(window);
