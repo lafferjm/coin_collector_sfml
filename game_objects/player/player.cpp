@@ -27,6 +27,11 @@ Player::Player(float scale, const std::string &texture_path) : m_sprite(m_textur
 
     m_sprite.setTextureRect(m_animations[m_current_animation].at(0));
     m_sprite.setScale({scale, scale});
+
+    const sf::FloatRect bounds = m_sprite.getLocalBounds();
+    m_sprite.setOrigin(sf::Vector2f(bounds.size.x / 2.f, bounds.size.y / 2.f));
+
+    m_sprite.setPosition(sf::Vector2f(50.f, 100.f));
 }
 
 void Player::draw(sf::RenderWindow &target) const {
@@ -40,6 +45,13 @@ void Player::update(const float delta_time, sf::Vector2f move_direction) {
 
     if (m_current_animation == Animation::WALK && move_direction == sf::Vector2f(0.f, 0.f)) {
         set_animation(Animation::IDLE);
+    }
+
+    const auto current_scale = m_sprite.getScale();
+    if (move_direction.x < 0 && current_scale.x > 0) {
+        m_sprite.setScale(sf::Vector2f(-current_scale.x, current_scale.y));
+    } else if (move_direction.x > 0 && current_scale.x < 0) {
+        m_sprite.setScale(sf::Vector2f(std::abs(current_scale.x), current_scale.y));
     }
 
     m_elapsed_time += delta_time;
