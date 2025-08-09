@@ -65,5 +65,8 @@ void Player::update(const float delta_time, sf::Vector2f move_direction) {
 }
 
 sf::FloatRect Player::get_bounds() const {
-    return m_sprite.getGlobalBounds();
+    const auto bounds = m_sprite.getGlobalBounds();
+    sf::RectangleShape hit_box(sf::Vector2f(bounds.size.x - 120, bounds.size.y - 30));
+    hit_box.setPosition(sf::Vector2f(bounds.position.x + 60, bounds.position.y + 15));
+    return hit_box.getGlobalBounds();
 }
