@@ -63,3 +63,7 @@ void Player::update(const float delta_time, sf::Vector2f move_direction) {
 
     m_sprite.setPosition(m_sprite.getPosition() + move_direction);
 }
+
+sf::FloatRect Player::get_bounds() const {
+    return m_sprite.getGlobalBounds();
+}

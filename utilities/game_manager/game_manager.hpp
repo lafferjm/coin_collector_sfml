@@ -14,9 +14,10 @@ public:
     void run();
 
 private:
-    void processEvents();
+    void process_events();
     void update(float);
     void render();
+    void handle_collisions();
 
 private:
     sf::RenderWindow m_window;

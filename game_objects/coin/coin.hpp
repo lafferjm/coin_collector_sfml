@@ -9,6 +9,7 @@ public:
   void draw(sf::RenderWindow &) const;
   void update(float);
   void set_position(float, float);
+  sf::FloatRect get_bounds() const;
 
 private:
   sf::Sprite m_sprite;

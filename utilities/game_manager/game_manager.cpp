@@ -1,6 +1,7 @@
 #include "game_manager.hpp"
 #include <memory>
 #include <random>
+#include <iostream>
 
 GameManager::GameManager() : m_window(sf::VideoMode({width, height}), "Coin Collector") {
     m_window.setFramerateLimit(frame_rate);
@@ -23,14 +24,16 @@ GameManager::GameManager() : m_window(sf::VideoMode({width, height}), "Coin Coll
 
 void GameManager::run() {
     while (m_window.isOpen()) {
-        processEvents();
+        process_events();
         const float delta_time = m_clock.restart().asSeconds();
         update(delta_time);
         render();
+
+        handle_collisions();
     }
 }
 
-void GameManager::processEvents() {
+void GameManager::process_events() {
     while (auto event = m_window.pollEvent()) {
         if (event->is<sf::Event::Closed>())
             m_window.close();
@@ -57,4 +60,18 @@ void GameManager::render() {
     m_player->draw(m_window);
     m_coins.draw(m_window);
     m_window.display();
+}
+
+void GameManager::handle_collisions() {
+    auto& coins = m_coins.get_objects();
+
+    for (auto it = coins.begin(); it != coins.end(); ) {
+        auto coin_bounds = (*it)->get_bounds();
+        if (m_player->get_bounds().findIntersection(coin_bounds).has_value()) {
+            it = coins.erase(it);
+            std::cout << "You collected a coin" << std::endl;
+        } else {
+            ++it;
+        }
+    }
 }

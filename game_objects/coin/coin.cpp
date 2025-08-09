@@ -25,3 +25,7 @@ void Coin::update(const float delta_time) {
 void Coin::set_position(float x, float y) {
   m_sprite.setPosition(sf::Vector2f({x, y}));
 }
+
+sf::FloatRect Coin::get_bounds() const {
+  return m_sprite.getGlobalBounds();
+}

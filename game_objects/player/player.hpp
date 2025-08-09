@@ -15,6 +15,7 @@ public:
     Player(float, const std::string &);
     void draw(sf::RenderWindow &) const;
     void update(float, sf::Vector2f);
+    sf::FloatRect get_bounds() const;
 private:
     void load_animations();
     void set_animation(Animation);
