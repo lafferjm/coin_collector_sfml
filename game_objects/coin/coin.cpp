@@ -11,7 +11,9 @@ Coin::Coin(float scale, const std::string &texture_path, int frame_count)
   m_sprite.setScale({scale, scale});
 }
 
-void Coin::draw(sf::RenderWindow &target) const { target.draw(m_sprite); }
+void Coin::draw(sf::RenderWindow &target) const {
+  target.draw(m_sprite);
+}
 
 void Coin::update(const float delta_time) {
   m_elapsed_time += delta_time;
@@ -27,5 +29,8 @@ void Coin::set_position(float x, float y) {
 }
 
 sf::FloatRect Coin::get_bounds() const {
-  return m_sprite.getGlobalBounds();
+  auto const bounds = m_sprite.getGlobalBounds();
+  sf::RectangleShape hit_box(sf::Vector2f(bounds.size.x/2 - 5 , bounds.size.y/2 - 5));
+  hit_box.setPosition(sf::Vector2f(bounds.position.x + 20, bounds.position.y + 18));
+  return hit_box.getGlobalBounds();
 }
