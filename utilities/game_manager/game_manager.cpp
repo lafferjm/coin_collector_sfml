@@ -34,13 +34,13 @@ void GameManager::run() {
 }
 
 void GameManager::process_events() {
-    while (auto event = m_window.pollEvent()) {
+    while (const auto event = m_window.pollEvent()) {
         if (event->is<sf::Event::Closed>())
             m_window.close();
     }
 }
 
-void GameManager::update(float delta_time) {
+void GameManager::update(const float delta_time) {
     sf::Vector2f move_direction(0.f, 0.f);
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left)) move_direction.x -= 1;

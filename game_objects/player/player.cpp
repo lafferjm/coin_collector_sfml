@@ -12,7 +12,7 @@ void Player::load_animations() {
     }
 }
 
-void Player::set_animation(Animation animation) {
+void Player::set_animation(const Animation animation) {
     m_current_animation = animation;
     m_current_frame = 0.f;
     m_elapsed_time = 0.f;
@@ -38,7 +38,7 @@ void Player::draw(sf::RenderWindow &target) const {
     target.draw(m_sprite);
 }
 
-void Player::update(const float delta_time, sf::Vector2f move_direction) {
+void Player::update(const float delta_time, const sf::Vector2f move_direction) {
     if (m_current_animation == Animation::IDLE && move_direction != sf::Vector2f(0.f, 0.f)) {
        set_animation(Animation::WALK);
     }
