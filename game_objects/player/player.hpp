@@ -17,6 +17,7 @@ public:
     void update(float, sf::Vector2f);
 private:
     void load_animations();
+    void set_animation(Animation);
 
     sf::Sprite m_sprite;
     sf::Texture m_texture;

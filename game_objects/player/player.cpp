@@ -12,6 +12,12 @@ void Player::load_animations() {
     }
 }
 
+void Player::set_animation(Animation animation) {
+    m_current_animation = animation;
+    m_current_frame = 0.f;
+    m_elapsed_time = 0.f;
+}
+
 Player::Player(float scale, const std::string &texture_path) : m_sprite(m_texture), m_current_animation(Animation::IDLE),
                                                                m_current_frame(0), m_frame_duration(1/m_animation_fps),
                                                                m_elapsed_time(0) {
@@ -28,6 +34,14 @@ void Player::draw(sf::RenderWindow &target) const {
 }
 
 void Player::update(const float delta_time, sf::Vector2f move_direction) {
+    if (m_current_animation == Animation::IDLE && move_direction != sf::Vector2f(0.f, 0.f)) {
+       set_animation(Animation::WALK);
+    }
+
+    if (m_current_animation == Animation::WALK && move_direction == sf::Vector2f(0.f, 0.f)) {
+        set_animation(Animation::IDLE);
+    }
+
     m_elapsed_time += delta_time;
     if (m_elapsed_time > m_frame_duration) {
         m_current_frame = (m_current_frame + 1) % static_cast<int>(m_animations[m_current_animation].size());
