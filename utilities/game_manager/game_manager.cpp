@@ -20,9 +20,13 @@ GameManager::GameManager() : m_window(sf::VideoMode({width, height}), "Coin Coll
         coin->set_position(x_position, y_position);
         m_coins.add(coin);
     }
+
+    m_audio_manager = AudioManager();
 }
 
 void GameManager::run() {
+    m_audio_manager.play_background_music();
+
     while (m_window.isOpen()) {
         process_events();
         const float delta_time = m_clock.restart().asSeconds();
@@ -69,6 +73,7 @@ void GameManager::handle_collisions() {
         auto coin_bounds = (*it)->get_bounds();
         if (m_player->get_bounds().findIntersection(coin_bounds).has_value()) {
             it = coins.erase(it);
+            m_audio_manager.play_coin_collected();
             std::cout << "You collected a coin" << std::endl;
         } else {
             ++it;

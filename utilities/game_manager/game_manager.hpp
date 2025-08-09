@@ -4,6 +4,7 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <memory>
 
+#include "../audio_manager/audio_manager.hpp"
 #include "../sprite_group/sprite_group.hpp"
 #include "../../game_objects/coin/coin.hpp"
 #include "../../game_objects/player/player.hpp"
@@ -24,6 +25,8 @@ private:
 
     std::unique_ptr<Player> m_player;
     SpriteGroup<Coin> m_coins;
+
+    AudioManager m_audio_manager;
 
     static constexpr int width = 1024;
     static constexpr int height = 768;
