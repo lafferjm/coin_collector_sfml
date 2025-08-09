@@ -3,7 +3,7 @@
 #include <random>
 #include <iostream>
 
-GameManager::GameManager() : m_window(sf::VideoMode({width, height}), "Coin Collector") {
+GameManager::GameManager() : m_window(sf::VideoMode({width, height}), "Coin Collector"), m_score(0) {
     m_window.setFramerateLimit(frame_rate);
 
     m_player = std::make_unique<Player>(5.f, "../assets/sprites/player.png");
@@ -74,7 +74,7 @@ void GameManager::handle_collisions() {
         if (m_player->get_bounds().findIntersection(coin_bounds).has_value()) {
             it = coins.erase(it);
             m_audio_manager.play_coin_collected();
-            std::cout << "You collected a coin" << std::endl;
+            m_score += 1;
         } else {
             ++it;
         }

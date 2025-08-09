@@ -25,6 +25,7 @@ private:
 
     std::unique_ptr<Player> m_player;
     SpriteGroup<Coin> m_coins;
+    int m_score;
 
     AudioManager m_audio_manager;
 
