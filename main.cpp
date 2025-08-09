@@ -2,6 +2,7 @@
 #include <SFML/System/Clock.hpp>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/VideoMode.hpp>
+#include <cmath>
 #include <memory>
 #include <optional>
 #include <random>
@@ -13,6 +14,19 @@
 constexpr int width = 1024;
 constexpr int height = 768;
 constexpr int frame_rate = 60;
+
+constexpr float player_speed = 200;
+
+sf::Vector2f normalize(sf::Vector2f move_direction) {
+  float length = std::sqrt(move_direction.x * move_direction.x + move_direction.y * move_direction.y);
+
+  if (length != 0.f) {
+    move_direction.x /= length;
+    move_direction.y /= length;
+  }
+
+  return move_direction;
+}
 
 int main(int, char **) {
   sf::RenderWindow window(sf::VideoMode({width, height}), "Coin Collector");
@@ -38,17 +52,37 @@ int main(int, char **) {
   }
 
   while (window.isOpen()) {
+    const float delta_time = clock.restart().asSeconds();
+
     while (const std::optional event = window.pollEvent()) {
       if (event->is<sf::Event::Closed>()) {
         window.close();
       }
     }
 
-    const float delta_time = clock.restart().asSeconds();
+    sf::Vector2f move_direction(0.f, 0.f);
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left)) {
+      move_direction.x -= 1;
+    }
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right)) {
+      move_direction.x += 1;
+    }
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up)) {
+      move_direction.y -= 1;
+    }
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down)) {
+      move_direction.y += 1;
+    }
+
+    move_direction = normalize(move_direction);
+
+    sf::Vector2f player_direction = move_direction * delta_time * player_speed;
 
     window.clear(sf::Color::Green);
 
-    player->update(delta_time);
+    player->update(delta_time, player_direction);
     coin_group.update(delta_time);
 
     player->draw(window);
@@ -56,5 +90,6 @@ int main(int, char **) {
 
     window.display();
   }
+
   return 0;
 }

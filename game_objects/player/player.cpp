@@ -27,11 +27,13 @@ void Player::draw(sf::RenderWindow &target) const {
     target.draw(m_sprite);
 }
 
-void Player::update(const float delta_time) {
+void Player::update(const float delta_time, sf::Vector2f move_direction) {
     m_elapsed_time += delta_time;
     if (m_elapsed_time > m_frame_duration) {
         m_current_frame = (m_current_frame + 1) % static_cast<int>(m_animations[m_current_animation].size());
         m_elapsed_time = 0.0f;
         m_sprite.setTextureRect(m_animations[m_current_animation].at(m_current_frame));
     }
+
+    m_sprite.setPosition(m_sprite.getPosition() + move_direction);
 }
