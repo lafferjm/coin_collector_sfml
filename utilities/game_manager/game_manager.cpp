@@ -3,20 +3,17 @@
 #include <random>
 #include <iostream>
 
-GameManager::GameManager() : m_window(sf::VideoMode({width, height}), "Coin Collector"), m_score(0) {
+GameManager::GameManager() :
+    m_window(sf::VideoMode({width, height}), "Coin Collector"),
+    m_score(0), m_gen(m_rd()), m_x_dist(0.f, 1024.f - 32.f), m_y_dist(0.f, 768.f - 32.f) {
     m_window.setFramerateLimit(frame_rate);
 
     m_player = std::make_unique<Player>(5.f, "../assets/sprites/player.png");
 
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_real_distribution x_dist(0.f, 1024.f - 32.f);
-    std::uniform_real_distribution y_dist(0.f, 768.f - 32.f);
-
-    for (int i = 0; i < 100; i++) {
+    for (int i = 0; i < max_coins; i++) {
         const auto coin = std::make_shared<Coin>(2.f, "../assets/sprites/coin.png", 9);
-        const float x_position = x_dist(gen);
-        const float y_position = y_dist(gen);
+        const float x_position = m_x_dist(m_gen);
+        const float y_position = m_y_dist(m_gen);
         coin->set_position(x_position, y_position);
         m_coins.add(coin);
     }
@@ -26,12 +23,15 @@ void GameManager::run() {
     m_audio_manager.play_background_music();
 
     while (m_window.isOpen()) {
-        process_events();
         const float delta_time = m_clock.restart().asSeconds();
+
+        process_events();
         update(delta_time);
         render();
 
         handle_collisions();
+
+        spawn_coins();
     }
 }
 
@@ -81,5 +81,17 @@ void GameManager::handle_collisions() {
         } else {
             ++it;
         }
+    }
+}
+
+void GameManager::spawn_coins() {
+    int coin_spawn_count = max_coins - m_coins.get_objects().size();
+
+    for (int i = 0; i < coin_spawn_count; i++) {
+        const auto coin = std::make_shared<Coin>(2.f, "../assets/sprites/coin.png", 9);
+        const float x_position = m_x_dist(m_gen);
+        const float y_position = m_y_dist(m_gen);
+        coin->set_position(x_position, y_position);
+        m_coins.add(coin);
     }
 }
