@@ -5,6 +5,7 @@
 #include <memory>
 
 #include "../audio_manager/audio_manager.hpp"
+#include "../hud/hud.hpp"
 #include "../sprite_group/sprite_group.hpp"
 #include "../../game_objects/coin/coin.hpp"
 #include "../../game_objects/player/player.hpp"
@@ -25,6 +26,7 @@ private:
 
     std::unique_ptr<Player> m_player;
     SpriteGroup<Coin> m_coins;
+    HUD m_hud;
     int m_score;
 
     AudioManager m_audio_manager;

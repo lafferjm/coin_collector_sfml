@@ -20,8 +20,6 @@ GameManager::GameManager() : m_window(sf::VideoMode({width, height}), "Coin Coll
         coin->set_position(x_position, y_position);
         m_coins.add(coin);
     }
-
-    m_audio_manager = AudioManager();
 }
 
 void GameManager::run() {
@@ -61,8 +59,12 @@ void GameManager::update(const float delta_time) {
 
 void GameManager::render() {
     m_window.clear(sf::Color::Green);
-    m_player->draw(m_window);
+
     m_coins.draw(m_window);
+    m_player->draw(m_window);
+
+    m_hud.draw(m_window);
+
     m_window.display();
 }
 
@@ -75,6 +77,7 @@ void GameManager::handle_collisions() {
             it = coins.erase(it);
             m_audio_manager.play_coin_collected();
             m_score += 1;
+            m_hud.set_score(m_score);
         } else {
             ++it;
         }

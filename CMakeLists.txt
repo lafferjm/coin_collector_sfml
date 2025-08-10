@@ -10,7 +10,9 @@ add_executable(coin_collector main.cpp game_objects/coin/coin.cpp game_objects/p
         utilities/game_manager/game_manager.cpp
         utilities/game_manager/game_manager.hpp
         utilities/audio_manager/audio_manager.cpp
-        utilities/audio_manager/audio_manager.hpp)
+        utilities/audio_manager/audio_manager.hpp
+        utilities/hud/hud.cpp
+        utilities/hud/hud.hpp)
 target_link_libraries(coin_collector PRIVATE SFML::Graphics SFML::Window SFML::Audio)
 
 add_custom_command(

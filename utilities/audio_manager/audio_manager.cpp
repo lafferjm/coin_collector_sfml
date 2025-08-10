@@ -12,6 +12,5 @@ void AudioManager::play_background_music() {
 }
 
 void AudioManager::play_coin_collected() {
-    m_coin_collected.setBuffer(m_coin_buffer);
     m_coin_collected.play();
 }
