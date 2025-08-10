@@ -16,8 +16,8 @@ add_executable(coin_collector main.cpp game_objects/coin/coin.cpp game_objects/p
 target_link_libraries(coin_collector PRIVATE SFML::Graphics SFML::Window SFML::Audio)
 
 add_custom_command(
-    TARGET coin_collector POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_directory
-            ${CMAKE_SOURCE_DIR}/assets
-            $<TARGET_FILE_DIR:coin_collector>/assets
+        TARGET coin_collector POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/assets
+        $<TARGET_FILE_DIR:coin_collector>/assets
 )

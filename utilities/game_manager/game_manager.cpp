@@ -3,9 +3,8 @@
 #include <random>
 #include <iostream>
 
-GameManager::GameManager() :
-    m_window(sf::VideoMode({width, height}), "Coin Collector"),
-    m_score(0), m_gen(m_rd()), m_x_dist(0.f, 1024.f - 32.f), m_y_dist(0.f, 768.f - 32.f) {
+GameManager::GameManager() : m_window(sf::VideoMode({width, height}), "Coin Collector"),
+                             m_score(0), m_gen(m_rd()), m_x_dist(0.f, 1024.f - 32.f), m_y_dist(0.f, 768.f - 32.f) {
     m_window.setFramerateLimit(frame_rate);
 
     m_player = std::make_unique<Player>(5.f, "../assets/sprites/player.png");
@@ -69,9 +68,9 @@ void GameManager::render() {
 }
 
 void GameManager::handle_collisions() {
-    auto& coins = m_coins.get_objects();
+    auto &coins = m_coins.get_objects();
 
-    for (auto it = coins.begin(); it != coins.end(); ) {
+    for (auto it = coins.begin(); it != coins.end();) {
         auto coin_bounds = (*it)->get_bounds();
         if (m_player->get_bounds().findIntersection(coin_bounds).has_value()) {
             it = coins.erase(it);

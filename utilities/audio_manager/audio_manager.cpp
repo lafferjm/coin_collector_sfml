@@ -1,6 +1,7 @@
 #include "audio_manager.hpp"
 
-AudioManager::AudioManager() : m_background_music("../assets/sounds/background_music.ogg"), m_coin_buffer("../assets/sounds/explosion.wav"), m_coin_collected(m_coin_buffer) {
+AudioManager::AudioManager() : m_background_music("../assets/sounds/background_music.ogg"),
+                               m_coin_buffer("../assets/sounds/explosion.wav"), m_coin_collected(m_coin_buffer) {
     m_background_music.setLooping(true);
     m_background_music.setVolume(60.f);
 

@@ -18,8 +18,10 @@ void Player::set_animation(const Animation animation) {
     m_elapsed_time = 0.f;
 }
 
-Player::Player(float scale, const std::string &texture_path) : m_sprite(m_texture), m_current_animation(Animation::IDLE),
-                                                               m_current_frame(0), m_frame_duration(1/m_animation_fps),
+Player::Player(float scale, const std::string &texture_path) : m_sprite(m_texture),
+                                                               m_current_animation(Animation::IDLE),
+                                                               m_current_frame(0),
+                                                               m_frame_duration(1 / m_animation_fps),
                                                                m_elapsed_time(0) {
     m_texture = sf::Texture(texture_path, false);
     m_sprite = sf::Sprite(m_texture);
@@ -40,7 +42,7 @@ void Player::draw(sf::RenderWindow &target) const {
 
 void Player::update(const float delta_time, const sf::Vector2f move_direction) {
     if (m_current_animation == Animation::IDLE && move_direction != sf::Vector2f(0.f, 0.f)) {
-       set_animation(Animation::WALK);
+        set_animation(Animation::WALK);
     }
 
     if (m_current_animation == Animation::WALK && move_direction == sf::Vector2f(0.f, 0.f)) {

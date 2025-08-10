@@ -13,16 +13,21 @@ public:
     };
 
     Player(float, const std::string &);
+
     void draw(sf::RenderWindow &) const;
+
     void update(float, sf::Vector2f);
+
     sf::FloatRect get_bounds() const;
+
 private:
     void load_animations();
+
     void set_animation(Animation);
 
     sf::Sprite m_sprite;
     sf::Texture m_texture;
-    std::unordered_map<Animation, std::vector<sf::IntRect>> m_animations;
+    std::unordered_map<Animation, std::vector<sf::IntRect> > m_animations;
     Animation m_current_animation;
 
     int m_current_frame;

@@ -14,13 +14,18 @@
 class GameManager {
 public:
     GameManager();
+
     void run();
 
 private:
     void process_events();
+
     void update(float);
+
     void render();
+
     void handle_collisions();
+
     void spawn_coins();
 
     sf::RenderWindow m_window;

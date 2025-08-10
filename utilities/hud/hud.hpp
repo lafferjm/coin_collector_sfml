@@ -7,8 +7,11 @@
 class HUD {
 public:
     HUD();
+
     void set_score(int);
+
     void draw(sf::RenderWindow &) const;
+
 private:
     sf::Font m_font;
     sf::Text m_score_text;
