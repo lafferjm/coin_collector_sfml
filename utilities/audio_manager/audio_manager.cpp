@@ -4,7 +4,7 @@ AudioManager::AudioManager() : m_background_music("../assets/sounds/background_m
     m_background_music.setLooping(true);
     m_background_music.setVolume(60.f);
 
-    m_coin_collected.setVolume(50.f);
+    m_coin_collected.setVolume(20.f);
 }
 
 void AudioManager::play_background_music() {

@@ -13,7 +13,7 @@ GameManager::GameManager() : m_window(sf::VideoMode({width, height}), "Coin Coll
     std::uniform_real_distribution x_dist(0.f, 1024.f - 32.f);
     std::uniform_real_distribution y_dist(0.f, 768.f - 32.f);
 
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 100; i++) {
         const auto coin = std::make_shared<Coin>(2.f, "../assets/sprites/coin.png", 9);
         const float x_position = x_dist(gen);
         const float y_position = y_dist(gen);
